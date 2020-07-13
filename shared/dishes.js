@@ -18,7 +18,7 @@ export const DISHES =
         label:'',
         price:'1.99',
         featured: false,
-        description:'Deep fried Zucchini coated with mildly spiced Chickpea flour batter accompanied with a sweet-tangy tamarind sauce'
+        description:'Deep dfcgvh fried Zucchini coated with mildly spiced Chickpea flour batter accompanied with a sweet-tangy tamarind sauce'
         },
         {
         id: 2,

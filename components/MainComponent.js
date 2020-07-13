@@ -1,34 +1,68 @@
 import React, { Component } from 'react';
 import Menu from './Menu';
-import Dishdetail from './DishDetailComponent';
 import { View , Platform} from 'react-native';
-//import { createStackNavigator } from '@react-navigation/stack';
+import Home from './Home';
+import {createAppContainer,} from 'react-navigation'; 
+import {createStackNavigator, createDrawerNavigator} from 'react-navigation-stack';
 
-import {createAppContainer} from 'react-navigation'; 
-import {createStackNavigator} from 'react-navigation-stack';
-const Navigation=createStackNavigator({
-  menu:{screen :Menu},
-  Dishdetail:{screen: Dishdetail},
-},
-{
-  initialRouteParams: 'Menu',
-  navigationOptions: {
-      headerStyle: {
-          backgroundColor: "#512DA8"
-      },
-      headerTintColor: '#fff',
-      headerTitleStyle: {
-          color: "#fff"            
+const HomeNavigator = createStackNavigator({
+  Home: { screen: Home }
+}, {
+  navigationOptions: ({ navigation }) => ({
+  
+    headerStyle: {
+        backgroundColor: "#512DA8"
+    },
+    headerTitleStyle: {
+        color: "#fff"            
+    },
+    headerTintColor: "#fff"  
+  })
+});
+
+const MenuNavigator = createStackNavigator({
+  Menu: { screen: Menu }
+}, {
+  navigationOptions: ({ navigation }) => ({
+    headerStyle: {
+        backgroundColor: "#512DA8"
+    },
+    headerTitleStyle: {
+        color: "#fff"            
+    },
+    headerTintColor: "#fff"  
+  })
+});
+
+const MainNavigation=createDrawerNavigator({
+  Home: 
+    { screen: HomeNavigator,
+      navigationOptions: {
+        title: 'Home',
+        drawerLabel: 'Home'
       }
-  }
-})
-const Ap = createAppContainer(Navigation);
+    },
+  Menu: 
+    { screen: MenuNavigator,
+      navigationOptions: {
+        title: 'Menu',
+        drawerLabel: 'Menu'
+      }, 
+    }
+}, 
+  {
+drawerBackgroundColor: '#D1C4E9'
+});
+
+// const MenuNav = createAppContainer(MenuNavigator);
+// const HomeNav = createAppContainer(HomeNavigator);
+// const MainNav=createAppContainer(MainNavigation);
 class Main extends Component {
   
   render() {
  return(
     <View style={{ flex:1, paddingTop:Platform.OS==='ios'? 0: Expo.Constants.statusBarHeight }}>
-    <Ap/>
+    <MainNavigation/>
     </View>
  )
 }
