@@ -1,29 +1,35 @@
 import React, { Component } from 'react';
 import Menu from './Menu';
 import Dishdetail from './DishDetailComponent';
-import { View } from 'react-native';
+import { View , Platform} from 'react-native';
+//import { createStackNavigator } from '@react-navigation/stack';
 
-import { DISHES } from '../shared/dishes';
-
-class Main extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      dishes: DISHES,
-      selectedDish: null
-    };
+import {createAppContainer} from 'react-navigation'; 
+import {createStackNavigator} from 'react-navigation-stack';
+const Navigation=createStackNavigator({
+  menu:{screen :Menu},
+  Dishdetail:{screen: Dishdetail},
+},
+{
+  initialRouteParams: 'Menu',
+  navigationOptions: {
+      headerStyle: {
+          backgroundColor: "#512DA8"
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+          color: "#fff"            
+      }
   }
-  onDishSelect(dishId) {
-    this.setState({selectedDish: dishId})
-}
-
-
+})
+const Ap = createAppContainer(Navigation);
+class Main extends Component {
+  
   render() {
  return(
-    <View style={{flex:1}}>
-            <Menu dishes={this.state.dishes} onPress={(dishId) => this.onDishSelect(dishId)} />
-            <Dishdetail dish={this.state.dishes.filter((dish) => dish.id === this.state.selectedDish)[0]} />
-        </View>
+    <View style={{ flex:1, paddingTop:Platform.OS==='ios'? 0: Expo.Constants.statusBarHeight }}>
+    <Ap/>
+    </View>
  )
 }
 }
