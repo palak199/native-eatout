@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { View, FlatList } from 'react-native';
+import { FlatList } from 'react-native';
 import { ListItem } from 'react-native-elements';
 import {DISHES} from '../shared/dishes';
-
+import Dishdetail from './DishdetailComponent';
 class Menu extends Component {
     constructor(props){
     super(props);
@@ -25,7 +25,11 @@ render(){
                     title={item.name}
                     subtitle={item.description}
                     hideChevron={true}
-                    onPress={()=>navigate('Dishdetail',{dishId:item.id})}
+                    onPress={()=>navigate('Dishdetail',
+                    {
+                        dishId:3
+                    },
+                )}
                     leftAvatar={{ source: require('./images/uthappizza.png')}}
                   />
         );
