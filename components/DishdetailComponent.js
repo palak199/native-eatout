@@ -10,22 +10,17 @@ function RenderDish(props) {
     const dish = props.dish;
         if (dish != null) {
             return(
-                <Card
-                featuredTitle={dish.name}
-                image={require('./images/uthappizza.png')}>
-                    <Text style={{margin: 10}}>
-                        {dish.description}
-                        <Icon 
+                <Card title={dish.name}> 
+                    <Image source={require('./images/uthappizza.png')}/>
+                    <Text>{dish.description}</Text>
+                    <Icon 
                         raised
                         reverse
                         name={ props.favorite ? 'heart' : 'heart-o'}
                         type='font-awesome'
                         color='#f50'
                         onPress={() => props.favorite ? console.log('Already favorite') : props.onPress()}/>
-                    </Text>
-                  
-               
-                </Card>
+                    </Card>
             );
         }
         else {
@@ -37,7 +32,8 @@ function RenderComments(props) {
     const renderCommentItem = ({item, index}) => {
         return (
             <View key={index} style={{margin: 10}}>
-                <Text style={{fontSize: 14}}>{item.comment}</Text>
+                 
+                <Text style={{fontSize: 14}}>{item.comment} {item.dishId} , {props.route}</Text>
                 <Text style={{fontSize: 12}}>{item.rating} Stars</Text>
                 <Text style={{fontSize: 12}}>{'-- ' + item.author + ', ' + item.date} </Text>
             </View>
@@ -63,7 +59,9 @@ class  Dishdetail extends Component {
         this.state={
             dishes:DISHES,
             comments: COMMENTS,
-            favorites:[]
+            favorites:[],
+            
+
         }
     }
    
@@ -77,19 +75,19 @@ class  Dishdetail extends Component {
         }
     }
     render(){
-    //const dishId=this.props.route.params.dishId
-    const {route}=this.props
-    /* 2. Get the param */
-    const {dishId} = route.params;
-    const str=JSON.stringify({dishId})
     
+    const dishId=(this.props.route.params.dishId)
+    //const str=JSON.stringify({dishId})
+    console.log(dishId)
     return(
-    <ScrollView>
-         <RenderDish dish={this.state.dishes[+dishId]}
-        favorite={this.state.favorites.some(el=>el===dishId)}
-         onPress={()=>this.markFavourite(dishId)}   />
-        <RenderComments comments={this.state.comments.filter((comment) => comment.dishId === dishId)} />
-    </ScrollView>);
+    <View>
+         <RenderDish 
+        dish={this.state.dishes[dishId]}
+        favorite={this.state.favorites.some(el=>el===this.props.route.params.dishId)}
+         onPress={()=>this.markFavourite(this.props.route.params.dishId)}   />
+        <RenderComments 
+        comments={this.state.comments.filter((comment) => comment.dishId === this.props.route.params.dishId)} />
+    </View>);
     }
 }
 

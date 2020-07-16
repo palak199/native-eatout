@@ -68,21 +68,21 @@ function MenuNavigator ({navigation}){
            }}
         />
            <Stack.Screen name="Dishdetail"
-           options={{
-            title: 'dish detail',
-            headerStyle: {
-                backgroundColor: "#512DA8"
-            },
-            headerTitleStyle: {
-                color: "#fff"            
-            },
-            headerTintColor: "#fff"  
-          }} 
-          navigationOptions={{ 
-            headerLeft: <Icon name="menu" size={24} 
-            color= 'white'
-            onPress={ () => navigation.toggleDrawer() }/>
-           }} 
+          //  options={{
+          //   title: 'dish detail',
+          //   headerStyle: {
+          //       backgroundColor: "#512DA8"
+          //   },
+          //   headerTitleStyle: {
+          //       color: "#fff"            
+          //   },
+          //   headerTintColor: "#fff"  
+          // }} 
+          // navigationOptions={{ 
+          //   headerLeft: <Icon name="menu" size={24} 
+          //   color= 'white'
+          //   onPress={ () => navigation.toggleDrawer() }/>
+          //  }} 
           component={Dishdetail}/>
           
       </Stack.Navigator>

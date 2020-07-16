@@ -18,6 +18,7 @@ class Menu extends Component {
    
 render(){
     const {navigate}=this.props.navigation;
+    
     const renderMenuItem = ({item, index}) => {
         return (
                 <ListItem
@@ -27,7 +28,7 @@ render(){
                     hideChevron={true}
                     onPress={()=>navigate('Dishdetail',
                     {
-                        dishId:3
+                        dishId:index
                     },
                 )}
                     leftAvatar={{ source: require('./images/uthappizza.png')}}
