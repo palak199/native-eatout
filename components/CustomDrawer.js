@@ -1,8 +1,8 @@
-import { DrawerItem} from '@react-navigation/drawer';
+
 import { SafeAreaView } from 'react-native-safe-area-context'; 
 import React from 'react';
 import { DrawerItemList } from '@react-navigation/drawer';
-import { View , Text, useScrollToTop ,ScrollView,Image,StyleSheet} from 'react-native';
+import { View , Text, Image,StyleSheet} from 'react-native';
 export const CustomDrawerComponent=(props)=>{
     
     return(
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     },
     drawerHeader: {
       backgroundColor: '#512DA8',
-      height: 140,
+      height: 100,
       alignItems: 'center',
       justifyContent: 'center',
       flex: 1,
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
       fontWeight: 'bold'
     },
     drawerImage: {
-      margin: 10,
+      margin: 2,
       width: 80,
       height: 60
     }
