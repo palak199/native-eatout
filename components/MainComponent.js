@@ -10,7 +10,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import {Icon} from 'react-native-elements'
 import Dishdetail from './DishdetailComponent';
-import {CustomDrawerComponent} from './CustomDrawer'
+import {CustomDrawerComponent} from './CustomDrawer';
+import Reservation from './ReservationComponent';
 import { connect } from 'react-redux';
 import { fetchDishes, fetchComments, fetchPromos, fetchLeaders } from '../redux/ActionCreators';
 const Drawer=createDrawerNavigator();
@@ -60,6 +61,28 @@ function HomeNavigator({navigation}){
     </Stack.Navigator>
   )
 };
+function ReservationNavigator({ navigation }) {
+  return (
+    <Stack.Navigator  initialRouteName='Reservation' >
+      <Stack.Screen  name="Reservation" component={Reservation}
+      NavigationOptions = {{
+      headerStyle: {
+        backgroundColor: "#512DA8"
+    },
+    headerTitleStyle: {
+        color: "#fff"            
+    },
+    headerTintColor: "#fff",
+    headerLeft: <Icon name="menu" size={24}
+      iconStyle={{ color: 'white' }} 
+      onPress={ () => navigation.navigate('DrawerToggle') } />    
+  }}>
+        
+        </Stack.Screen>
+      </Stack.Navigator>)
+     
+ 
+}
 
 function MenuNavigator ({navigation}){
     return(   
@@ -168,7 +191,7 @@ function MainNavigation(){
   
    >
    
-      <Drawer.Screen name="Home" 
+   <Drawer.Screen name="Home" 
       component={HomeNavigator} 
       options={{ 
         drawerLabel: 'Home',
@@ -180,10 +203,24 @@ function MainNavigation(){
             color={tintColor}
           />
         ),
-       }}
-       
-      
+       }}   
      />
+   
+     <Drawer.Screen name="reservation" 
+      component={ReservationNavigator} 
+      options={{ 
+        drawerLabel: 'Reserve a table',
+        drawerIcon: ({ tintColor }) => (
+          <Icon
+            name='cutlery'
+            type='font-awesome'            
+            size={22}
+            color={tintColor}
+          />
+        ),
+       }}   
+     />
+     
       <Drawer.Screen name="Menu" 
       component={MenuNavigator} 
       options={{
