@@ -5,13 +5,14 @@ import Home from './Home';
 import Menu from './Menu';
 import Contact from './ContactComponent';
 import About from './AboutComponent';
+import Favorites from './FavoriteComponent';
+import Reservation from './ReservationComponent';
+import Dishdetail from './DishdetailComponent';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import {Icon} from 'react-native-elements'
-import Dishdetail from './DishdetailComponent';
 import {CustomDrawerComponent} from './CustomDrawer';
-import Reservation from './ReservationComponent';
 import { connect } from 'react-redux';
 import { fetchDishes, fetchComments, fetchPromos, fetchLeaders } from '../redux/ActionCreators';
 const Drawer=createDrawerNavigator();
@@ -35,7 +36,7 @@ const mapDispatchToProps = dispatch => ({
 
 function HomeNavigator({navigation}){
     return(
-    <Stack.Navigator >
+    <Stack.Navigator>
       <Stack.Screen name="Home" 
       component={Home} 
       options={{
@@ -61,6 +62,35 @@ function HomeNavigator({navigation}){
     </Stack.Navigator>
   )
 };
+function FavoritesNavigator({navigation}){
+  return(
+  <Stack.Navigator>
+    <Stack.Screen name="Favorites" 
+    component={Favorites} 
+    options={{
+      title: 'favorites',
+      headerStyle: {
+          backgroundColor: "#512DA8"
+      },
+      headerTitleStyle: {
+          color: "#fff"            
+      },
+      headerTintColor: "#fff" ,
+      
+      
+    }}
+    navigationOptions={{ 
+      headerLeft: <Icon name="heart" size={22} 
+      color= 'white'
+      onPress={ () => navigation.toggleDrawer() }/>
+     }}
+   
+    
+    />
+  </Stack.Navigator>
+)
+};
+
 function ReservationNavigator({ navigation }) {
   return (
     <Stack.Navigator  initialRouteName='Reservation' >
@@ -183,7 +213,7 @@ function MainNavigation(){
     <NavigationContainer>
     <Drawer.Navigator initialRouteName="Home"   
     drawerContent={(props) => <CustomDrawerComponent {...props} />}
-   drawerStyle={{
+    drawerStyle={{
     backgroundColor: '#D1C4E9',
    
    
@@ -204,7 +234,20 @@ function MainNavigation(){
           />
         ),
        }}   
-     />
+     /><Drawer.Screen name="Favorites" 
+     component={FavoritesNavigator} 
+     options={{ 
+       drawerLabel: 'my favorites',
+       drawerIcon: ({ tintColor }) => (
+         <Icon
+           name='heart'
+           type='font-awesome'            
+           size={22}
+           color={tintColor}
+         />
+       ),
+      }}   
+    />
    
      <Drawer.Screen name="reservation" 
       component={ReservationNavigator} 
